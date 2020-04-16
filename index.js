@@ -1,6 +1,3 @@
-const questions = [
-
-];
 
 
 
@@ -11,6 +8,7 @@ const questions = [
 const inquirer = require("inquirer");
 const fs = require("fs");
 const util = require("util");
+const axios = require("axios")
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
@@ -62,9 +60,12 @@ function promptUser() {
       message: "Questions?"
     }
   ]);
+  .then(function ({}) {
+    const queryUrl =
+  }
 }
 
-function generateMarkDown (answers) {
+function generatemarkDown (answers) {
   /*return `
   
 <!DOCTYPE html>
@@ -103,6 +104,6 @@ async function init() {
     
     console.log(err);
   }
-}
 
+}
 init();
