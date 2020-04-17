@@ -7,13 +7,18 @@
 
 const inquirer = require("inquirer");
 const fs = require("fs");
+const path = require("path");
 const util = require("util");
-const axios = require("axios")
+const apiCall = require('./utils/api.js')
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
-function promptUser() {
-  return inquirer.prompt([
+
+  const questions=[
+    { type: "input",
+      name: "user",
+      message: "What's your username:"
+    },
     {
       type: "input",
       name: "title",
@@ -37,7 +42,7 @@ function promptUser() {
     {
       type: "input",
       name: "usage",
-      message: "Useage"
+      message: "Usage"
     },
     {
       type: "input",
@@ -59,13 +64,11 @@ function promptUser() {
       name: "questions",
       message: "Questions?"
     }
-  ]);
-  .then(function ({}) {
-    const queryUrl =
-  }
-}
+  ];
+  
+    
 
-function generatemarkDown (answers) {
+function generateMarkDown (answers) {
   /*return `
   
 <!DOCTYPE html>
@@ -91,10 +94,17 @@ function generatemarkDown (answers) {
 </body>
 </html>`;*/
 }
-
-async function init() {
+function writeToFile (filename, data){
+  return fs.writeFileSync(path.join (process.cwd(),filename),data)
+} 
+ function init() {
+   inquirer.prompt(questions).then (response => {
+     apiCall.getUser(response.user).then(({data})=>{
+     writeToFile("README.md", generateMarkDown({...response, ...data}) )  
+     })
+   })
   
-  try {
+  /*try {
     const answers = await promptUser();
 
     const markDown = generatemarkDown(answers);
@@ -104,6 +114,6 @@ async function init() {
     
     console.log(err);
   }
-
+*/
 }
 init();
