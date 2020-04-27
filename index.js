@@ -10,8 +10,8 @@ const fs = require("fs");
 const path = require("path");
 const util = require("util");
 const apiCall = require('./utils/api.js');
+const generateMarkDown = require('./utils/generateMarkdown')
 
-const writeFileAsync = util.promisify(fs.writeFile);
 
 
   const questions=[
@@ -29,15 +29,12 @@ const writeFileAsync = util.promisify(fs.writeFile);
       name: "description",
       message: "Provide a description?"
     },
-    {
-      type: "input",
-      name: "tableOfContents",
-      message: "Table of Contents?"
-    },
+    
     {
       type: "input",
       name: "installation",
-      message: "Installation?"
+      message: "Installation?",
+      default: 'npm i'
     },
     {
       type: "input",
@@ -45,9 +42,10 @@ const writeFileAsync = util.promisify(fs.writeFile);
       message: "Usage"
     },
     {
-      type: "input",
+      type: "list",
       name: "license",
-      message: "License info"
+      message: "What type of license should you have for your project?",
+      choices: ['MIT','Apache 2.0','BSD3','None']
     },
     {
       type: "input",
@@ -58,19 +56,13 @@ const writeFileAsync = util.promisify(fs.writeFile);
       type: "input",
       name: "tests",
       message: "Tests?"
-    },
-    {
-      type: "input",
-      name: "questions",
-      message: "Questions?"
     }
+   
   ];
   
     
 
-function generateMarkDown (answers) {
- 
-}
+
 function writeToFile (filename, data){
   return fs.writeFileSync(path.join (process.cwd(),filename),data)
 } 

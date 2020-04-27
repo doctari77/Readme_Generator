@@ -1,9 +1,8 @@
-function generateMarkdown(data) {
-  return `
-# ${data.title}
+
+# test
 
 ##Description
-  ${data.description}
+  test
 
 ## Table of Contents 
 * [Installation](#installation)
@@ -14,17 +13,13 @@ function generateMarkdown(data) {
 * [Questions](#questions)
 ## Installation
 To install necessary dependencies, run the following command:
-  ${data.installation}
+  npm i
 ##Usage
-  ${data.usage}
+  test
  ##Contributing 
-  ${data.contributing}
+  no
   #Tests
-  ${data.test}
+  undefined
 ##Questions
- Any questions about the repo contact ${data.user}directly at ${data.email}
+ Any questions about the repo contact doctari77directly at null
 
-`;
-}
-
-module.exports = generateMarkdown;
